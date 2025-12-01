@@ -1,0 +1,60 @@
+Portfolio aula de eletiva 
+Primeiro encontro  dia 22/08: Para o primeiro encontro o professor Alex de maneira 
+interativa com a turma levantou questionamentos sobre como será o desenvolvimento da 
+matéria no decorrer do semestre, com isso foi decidido os métodos de avaliação, sendo 
+eles: 
+1 portfólio contendo anotações de todas as aulas e atividades desenvolvidas 
+1 projeto em trio com tema ainda a definir pelo professor 
+atividades durante o projeto 
+depois disso foi levantado a proposta de ganhar 0,5 ponto na média pela frequência na aula 
+e mais 0,5 ponto por ter participado da primeira aula 
+as aulas teóricas serão divididas em 4 módulos - 
+Primeiro módulo: entender os tipos, fundamentos, fluxo de controle, estruturas de 
+dados, integração com banco de dados - - - 
+Segundo módulo: fundamentos de concorrência, paralelismo 
+Terceiro módulo: aprendizado de um framework para auxiliar na programação de 
+concorrência, sincronização e tratamento de erros 
+Quarto módulo: exemplos e aplicações práticas 
+O professor também avisou que teremos exercícios durante o semestre. Realizamos uma 
+votação sobre a quantidade de exercícios e ficou definido 10 por semana 
+
+
+Segundo encontro dia 29/08: Professor ditou 25 atividades para serem desenvolvidas 
+introdução a linguagem Go, da pra ver na pagina de exercicios
+
+
+Terceiro encontro dia 05/09: Professor passou o conteúdo sobre as principais características 
+de Golang 
+Compilada tem o foco em alto desempenho 
+Maior segurança: compilar antes ajuda na prevenção de erros 
+Concorrência: suportar a concorrência de processos 
+Tipada: vai ajudar a prevenir os tipos de variáveis 
+Também visualizamos a documentação de Golang e um site para resolver e aprender 
+exercícios 
+https://gobyexample.com/ 
+O professor levantou temas para os grupos pesquisarem e discutir com os outros grupos 
+Foi levantado qual a linguagem de programação favorita do grupo e comparar com a 
+linguagem Go, seguindo as características que foram levantadas na aula 
+
+Quarto encontro 12/09: Aula de Processamento e Paralelismo. Discussão sobre conceitos de execução paralela versus sequencial. (Nota de rodapé: Histórias inspiradoras sobre superação no ambiente acadêmico de seu professor quase cego).
+
+
+Quarto encontro  dia 19/09: Professor liberou a turma para participar da semana da 
+administração 
+
+Quinto encontro dia 26/09: O professor solicitou uma apresentação parcial do portfólio 
+
+Sexto encontro 03/10: O professor liberou a turma 
+
+Sétimo encontro 10/10:O professor deixou os alunos resolvendo os exercícios da lista e 
+consultando o site go by example   
+
+Oitavo encontro 17/10: O professor propôs um exercício que deveríamos criar através do 
+bloco de notas uma imagem do tipo ppm. Depois desenvolver um código que conseguisse 
+ler cada linha da imagem 
+
+Nono encontro 24/10: Revisamos juntamente com o professor alguns atributos e funções do 
+site gobyexample novamente. Dentre eles ficou como “tarefa” descobir a diferença entre 
+defer e panic
+
+14/11/2025: Liberados para atividade extracurricular - **Evento:** Palestra da Consciência Negra.

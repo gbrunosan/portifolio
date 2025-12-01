@@ -1,0 +1,455 @@
+1) Soma simples
+
+// Soma de dois números
+package exercicios
+
+import "fmt"
+
+func Soma(a, b int) {
+    fmt.Printf("%d + %d = %d\n", a, b, a+b)
+}
+
+
+2) Divisão entre dois números inteiros
+//Divisão de 2 números inteiros
+package exercicios
+
+import "fmt"
+
+func Divisao(a, b int) {
+    fmt.Printf("%d / %d = %d\n", a, b, a / b)
+}
+
+3) Antecessor e sucessor de um número
+//Imprimir antecessor e sucessor de um número
+package exercicios
+
+import "fmt"
+
+func AntecessorSucessor(numero int) {
+	fmt.Printf("Você digitou: %d | Antecessor: %d | Sucessor: %d\n", numero, numero-1, numero+1)
+}
+
+4) Verificar se um número é par/ímpar e positivo/negativo
+//Verificar se é par ou ímpar ou positivo ou negativo
+package exercicios
+
+import "fmt"
+
+func VerificarNumero(n int) {
+	tipo := ""
+	if n%2 == 0 {
+		tipo = "Par"
+	} else{
+		tipo = "Ímpar"
+	}
+
+	sinal := ""
+	if n > 0 {
+		sinal = "Positivo"
+	} else if n < 0 {
+		sinal = "Negativo"
+	} else {
+		sinal = "Neutro"
+	}
+
+	fmt.Printf("O número %d é %s e %s\n", n, tipo, sinal)
+}
+
+
+5) Verificação de número primo
+//Verificação de número primo
+package exercicios
+
+import ("fmt"; "math")
+
+func VerificarPrimo(n int) {
+	if n <= 1 {
+		fmt.Printf("%d não é primo\n", n)
+		return
+	}
+
+	isPrimo := true
+
+	lastNumber := int(math.Sqrt(float64(n)))
+
+	for i := 2; i <= lastNumber; i++ {
+		if n%i == 0 {
+			isPrimo = false
+			break
+		}
+	}
+
+	if isPrimo {
+		fmt.Printf("%d é primo\n", n)
+	} else {
+		fmt.Printf("%d não é primo\n", n)
+	}
+}	
+
+6) Ordenação de uma sequência numérica
+//Ordenação de uma sequência numérica
+package exercicios
+
+import ("fmt"; "sort" )
+
+func OrdenarNumeros(lista []int) {
+	fmt.Println("Lista original:", lista)
+	
+	sort.Ints(lista)
+	
+	fmt.Println("Lista ordenada:", lista)
+}
+
+7) Ordenação de caracteres em ordem ascendente
+//Ordenação de caracteres em ordem ascendente
+
+package exercicios
+
+import ("fmt"; "sort"; "strings")
+
+func OrdenarTexto(texto string) {
+	letras := strings.Split(texto, "")
+	
+	sort.Strings(letras)
+	
+	resultado := strings.Join(letras, "")
+	
+	fmt.Printf("Original: %s | Ordenado: %s\n", texto, resultado)
+}
+
+8) Implementação de uma árvore de decisão
+
+
+9) Exibir valor e endereço de memória de uma variável
+// Imprime o valor digitado e seu endereço na memória
+package exercicios
+
+import "fmt"
+
+func ImprimirValorEEndereco(n int) {
+	fmt.Printf("Digitado: %d | Endereço na Memória: %p\n", n, &n)
+}
+
+10) Resolver as Torres de Hanói (3 discos)
+// Pproblema das Torres de Hanoi
+package exercicios
+
+import "fmt"
+
+func TorresDeHanoi(n int, origem, destino, auxiliar string) {
+	if n > 0 {
+		TorresDeHanoi(n-1, origem, auxiliar, destino)
+		fmt.Printf("Mover disco %d de %s para %s\n", n, origem, destino)
+		TorresDeHanoi(n-1, auxiliar, destino, origem)
+	}
+}
+
+11) Determinar o dia da semana de uma data de nascimento
+// Sabendo a data de nascimento, saber o dia da semana que você nasceu
+package exercicios
+
+import ("fmt" ; "time")
+
+func DiaDaSemanaNascimento(dia, mes, ano int) {
+	data := time.Date(ano, time.Month(mes), dia, 0, 0, 0, 0, time.Local)
+	
+	diaSemana := data.Weekday()
+	
+	diasEmPortugues := []string{
+		"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", 
+		"Quinta-feira", "Sexta-feira", "Sábado",
+	}
+	
+	fmt.Printf("Você nasceu em um(a): %s\n", diasEmPortugues[diaSemana])
+}
+
+12) Comparação booleana entre dois números (igualdade)
+// Retorna true se dois valores forem iguais
+package exercicios
+
+func SaoIguais(a, b int) bool {
+	return a == b
+}
+
+13) Cálculo da moda de uma sequência
+// Achar o número que mais se repete na lista(moda)
+package exercicios
+
+func CalcularModa(numeros []int) int {
+	frequencia := make(map[int]int) // Mapa para contar repetições
+	moda := 0
+	maiorFrequencia := 0
+
+	for _, num := range numeros {
+		frequencia[num]++
+		if frequencia[num] > maiorFrequencia {
+			maiorFrequencia = frequencia[num]
+			moda = num
+		}
+	}
+	return moda
+}
+
+14) Verificação de palíndromo
+package exercicios
+
+import "strings"
+
+func VerificarPalindromo(palavra string) bool {
+	palavra = strings.ToLower(strings.ReplaceAll(palavra, " ", ""))
+
+	runes := []rune(palavra)
+
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+
+	invertida := string(runes)
+
+	return palavra == invertida
+}
+
+15) Cálculo da área de um retângulo
+// Cálculo da área de um retângulo
+package exercicios
+
+func AreaRetangulo(largura, altura float64) float64 {
+	return largura * altura
+}
+
+16) Conversão entre Celsius, Fahrenheit e Kelvin
+// Cálculo da temperatura de Celsius para Fahrenheit
+package exercicios
+
+import "fmt"
+
+func ConverterCelsiusParaFahrenheit(celsius float64) {
+	fahrenheit := (celsius * 1.8) + 32
+	fmt.Printf("%.2f°C equivale a %.2f°F\n", celsius, fahrenheit)
+}
+
+17) Simulação de jogo da adivinhação
+package exercicios
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func JogoAdivinhacao() {
+	numeroSecreto := rand.Intn(11) 
+	palpite := -1
+	tentativas := 0
+
+	fmt.Println("Tente adivinhar o número entre 0 e 10!")
+
+	for palpite != numeroSecreto {
+		fmt.Print("Seu palpite: ")
+		fmt.Scan(&palpite)
+		tentativas++
+
+		if palpite < numeroSecreto {
+			fmt.Println("O número é MAIOR...")
+		} else if palpite > numeroSecreto {
+			fmt.Println("O número é MENOR...")
+		}
+	}
+
+	fmt.Printf("Parabéns! Você acertou %d depois de %d vez(es).\n", numeroSecreto, tentativas)
+}
+
+18) Gerar arquivo JPG a partir de três matrizes RGB
+
+
+19) Contar vogais e consoantes de uma palavra
+// Encontra a qtd de vogais e qtd de consoantes em um texto
+package exercicios
+
+import "strings"
+
+func ContarVogaisConsoantes(palavra string) (int, int) {
+	vogais := "aeiouAEIOU"
+	qtdVogais := 0
+	qtdConsoantes := 0
+
+	for _, letra := range palavra {
+		// Verifica se é uma letra (ignora espaços ou símbolos básicos)
+		if (letra >= 'a' && letra <= 'z') || (letra >= 'A' && letra <= 'Z') {
+			if strings.ContainsRune(vogais, letra) {
+				qtdVogais++
+			} else {
+				qtdConsoantes++
+			}
+		}
+	}
+	return qtdVogais, qtdConsoantes
+}
+
+20) Contar ocorrências de uma palavra em um texto
+// Contagem de ocorrências de uma palavra em um texto
+package exercicios
+
+import "strings"
+
+func ContarOcorrenciaPalavra(texto string, alvo string) int {
+	textoLower := strings.ToLower(texto)
+	alvoLower := strings.ToLower(alvo)
+	
+	return strings.Count(textoLower, alvoLower)
+}
+
+21) Cálculo do fatorial
+// Cálcular fatorial de um número
+package exercicios
+
+func Fatorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	resultado := 1
+	for i := 1; i <= n; i++ {
+		resultado *= i
+	}
+	return resultado
+}
+
+22) Exibir mensagem “Hello World”
+// Imprimir "Hello World" na tela
+package exercicios
+
+import "fmt"
+
+func OlaMundo() {
+	fmt.Println("Hello World")
+}
+
+23) Cálculo do IMC
+// Cálculo do Índice de Massa Corporal (IMC)
+package exercicios
+
+import "fmt"
+
+func CalcularIMC(peso float64, altura float64) {
+	imc := peso / (altura * altura)
+	fmt.Printf("Peso: %.2f | Altura: %.2f | IMC: %.2f\n", peso, altura, imc)
+}
+
+24) Cálculo do MMC entre dois números
+// Cálcular MMC entre dois números
+package exercicios
+
+func mdc(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func CalcularMMC(a, b int) int {
+	return (a * b) / mdc(a, b)
+}
+
+25) Cálculo da média aritmética
+// Cálculo da média de um ou mais números
+package exercicios
+
+func CalcularMedia(numeros []float64) float64 {
+	soma := 0.0
+	for _, n := range numeros {
+		soma += n
+	}
+	return soma / float64(len(numeros))
+}
+
+
+e o main.go
+package main
+
+import (
+	"fmt"
+	"projeto/exercicios" // Certifique-se que "projeto" é o nome que você usou no go mod init
+)
+
+func main() {
+	fmt.Println("--- Exercício 1: ---")
+	exercicios.Soma(10, 5)
+    
+    fmt.Println("--- Exercício 2: ---")
+	exercicios.Divisao(10, 2)
+
+	fmt.Println("\n--- Exercício 3: Antecessor/Sucessor ---")
+	exercicios.AntecessorSucessor(99)
+
+	fmt.Println("\n--- Exercício 4: Verificações ---")
+	exercicios.VerificarNumero(-8)
+
+	fmt.Println("\n--- Exercício 5: Primos ---")
+	exercicios.VerificarPrimo(17)
+	exercicios.VerificarPrimo(10)
+
+	fmt.Println("\n--- Exercício 6: Ordenação Números ---")
+	meusNumeros := []int{9, 1, 5, 2, 8} 
+	exercicios.OrdenarNumeros(meusNumeros)
+
+	fmt.Println("\n--- Exercício 7: Ordenação Texto ---")
+	exercicios.OrdenarTexto("edcba")
+
+    fmt.Println("\n--- 9. Ponteiros ---")
+	exercicios.ImprimirValorEEndereco(100)
+
+	fmt.Println("\n--- 10. Torres de Hanói (3 discos) ---")
+	exercicios.TorresDeHanoi(3, "A", "C", "B")
+
+	fmt.Println("\n--- 11. Dia do Nascimento ---")
+	exercicios.DiaDaSemanaNascimento(02, 03, 2001)
+
+	fmt.Println("\n--- 14. Palíndromo ---")
+	fmt.Println("Arara é palíndromo?", exercicios.VerificarPalindromo("Arara"))
+	fmt.Println("Casa é palíndromo?", exercicios.VerificarPalindromo("Casa"))
+
+    fmt.Println("--- 12. Igualdade ---")
+	fmt.Println("5 e 5 são iguais?", exercicios.SaoIguais(5, 5))
+	fmt.Println("5 e 8 são iguais?", exercicios.SaoIguais(5, 8))
+
+	fmt.Println("\n--- 13. Moda ---")
+	lista := []int{1, 2, 3, 2, 4, 2, 5}
+	fmt.Println("A moda é:", exercicios.CalcularModa(lista))
+
+	fmt.Println("\n--- 15. Área Retângulo ---")
+	fmt.Println("Área:", exercicios.AreaRetangulo(10.0, 5.0))
+
+	fmt.Println("\n--- 16. Conversão Temperatura (°C → °F) ---")
+	exercicios.ConverterCelsiusParaFahrenheit(30)
+
+	fmt.Println("\n--- 19. Vogais e Consoantes ---")
+	v, c := exercicios.ContarVogaisConsoantes("Gersinho")
+	fmt.Printf("Palavra 'Gersinho' tem: %d vogais e %d consoantes\n", v, c)
+
+	fmt.Println("\n--- 20. Ocorrência de Palavra ---")
+	texto := "O rato roeu a roupa do outro rato de Roma"
+	qtd := exercicios.ContarOcorrenciaPalavra(texto, "rato")
+	fmt.Println("A palavra 'rato' aparece:", qtd, "vez(es)")
+
+	fmt.Println("\n--- 21. Fatorial ---")
+	fmt.Println("Fatorial de 5:", exercicios.Fatorial(5))
+
+	fmt.Println("\n--- 22. Hello World ---")
+	exercicios.OlaMundo()
+
+	fmt.Println("\n--- 23. IMC ---")
+	exercicios.CalcularIMC(80.0, 1.80)
+
+	fmt.Println("\n--- 24. MMC ---")
+	fmt.Println("MMC de 4 e 6 é:", exercicios.CalcularMMC(4, 6))
+
+	fmt.Println("\n--- 25. Média ---")
+	notas := []float64{7.5, 8.0, 9.5}
+	fmt.Printf("A média é: %.2f\n", exercicios.CalcularMedia(notas))
+    
+    
+	fmt.Println("\n--- Interação com u usuário ---")
+    fmt.Println("\n--- 17. Jogo da Adivinhação ---")
+	exercicios.JogoAdivinhacao()
+
+}
