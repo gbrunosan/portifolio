@@ -114,7 +114,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3, duration: 3 }}
-          className="absolute bottom-11 md:bottom-20 animate-bounce cursor-pointer z-20"
+          className="absolute bottom-16 md:bottom-20 animate-bounce cursor-pointer z-20"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
           <span className="text-muted-foreground text-sm">Role para ver mais</span>
