@@ -55,12 +55,12 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
                             ))}
                         </div>
                     </div>
-                    <CardTitle className="text-xl mt-2 h-8 flex items-center">
+                    <CardTitle className="text-xl mt-0.5 flex items-center">
                         {entry.title}
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="leading-relaxed text-muted-foreground mt-5">
+                    <p className="leading-relaxed text-muted-foreground mt-3">
                         {entry.description}
                     </p>
                 </CardContent>
