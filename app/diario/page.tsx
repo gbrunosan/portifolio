@@ -1,22 +1,105 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useRef, useState, useEffect } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
-import { CalendarDays } from "lucide-react"
+import { CalendarDays, ChevronDown, ChevronUp } from "lucide-react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
+
+interface DiaryEntry {
+    date: string
+    title: string
+    description: React.ReactNode
+    tags: string[]
+}
+
+const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
+    const [isExpanded, setIsExpanded] = useState(false)
+    const [showExpandButton, setShowExpandButton] = useState(false)
+    const contentRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (contentRef.current) {
+            // Check if the content height exceeds 275px
+            // We use a slight buffer to avoid showing it for borderline cases
+            if (contentRef.current.scrollHeight > 275) {
+                setShowExpandButton(true)
+            }
+        }
+    }, [])
+
+    return (
+        <Card className="relative overflow-hidden transition-all duration-300">
+            <div
+                ref={contentRef}
+                className={cn(
+                    "transition-all duration-300",
+                    !isExpanded && "max-h-[275px] overflow-hidden"
+                )}
+            >
+                <CardHeader>
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                        <div className="flex items-center gap-2 text-muted-foreground mb-1 md:mb-0">
+                            <CalendarDays className="h-4 w-4" />
+                            <span className="text-sm font-medium">{entry.date}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {entry.tags.map((tag) => (
+                                <Badge key={tag} variant="secondary" className="text-xs">
+                                    {tag}
+                                </Badge>
+                            ))}
+                        </div>
+                    </div>
+                    <CardTitle className="text-xl mt-2">{entry.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="leading-relaxed text-muted-foreground">
+                        {entry.description}
+                    </p>
+                </CardContent>
+            </div>
+
+            {showExpandButton && (
+                <div
+                    className={cn(
+                        "flex justify-center w-full bg-gradient-to-t from-card via-card/95 to-transparent",
+                        !isExpanded ? "absolute bottom-0 pt-16 pb-4" : "mt-4"
+                    )}
+                >
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+                    >
+                        {isExpanded ? (
+                            <>
+                                Ver menos <ChevronUp className="h-4 w-4" />
+                            </>
+                        ) : (
+                            <>
+                                Ver mais <ChevronDown className="h-4 w-4" />
+                            </>
+                        )}
+                    </button>
+                </div>
+            )}
+        </Card>
+    )
+}
 
 export default function DiaryPage() {
-    const entries = [
+    const entries: DiaryEntry[] = [
         {
             date: "22/08/2024",
-            title: "Primeiro Encontro - Introdução e Avaliação",
+            title: "Primeiro encontro - Introdução e avaliação",
             description: "Discussão interativa sobre o desenvolvimento da disciplina e métodos de avaliação (Portfólio, Projeto em Trio, Atividades). Definição da pontuação extra por frequência e participação. Visão geral dos 4 módulos teóricos (Fundamentos, Concorrência, Frameworks, Prática) e votação sobre exercícios (10 por semana).",
             tags: ["Introdução", "Avaliação", "Planejamento"],
         },
         {
             date: "29/08/2024",
-            title: "Segundo Encontro - Introdução à Linguagem",
+            title: "Segundo encontro - Introdução à linguagem",
             description: (
                 <>
                     Professor ditou 25 atividades introdutórias para serem desenvolvidas em GO. Você pode conferir os códigos na página de{" "}
@@ -39,7 +122,7 @@ export default function DiaryPage() {
         },
         {
             date: "05/09/2024",
-            title: "Terceiro Encontro - Características do GO",
+            title: "Terceiro encontro - Características do GO",
             description: (
                 <>
                     Aula sobre as principais características da linguagem: Compilada (alto desempenho), Segura (prevenção de erros), Concorrência e Tipagem forte. Exploração da documentação oficial e do site{" "}
@@ -58,31 +141,31 @@ export default function DiaryPage() {
         },
         {
             date: "12/09/2024",
-            title: "Quarto Encontro - Processamento e Paralelismo",
+            title: "Quarto encontro - Processamento e paralelismo",
             description: "Discussão sobre conceitos de execução paralela versus sequencial. Histórias inspiradoras sobre superação no ambiente acadêmico.",
             tags: ["Teoria", "Paralelismo"],
         },
         {
             date: "19/09/2024",
-            title: "Semana da Administração",
+            title: "Semana da administração",
             description: "Turma liberada para participar das atividades da Semana da Administração.",
             tags: ["Evento"],
         },
         {
             date: "26/09/2024",
-            title: "Quinto Encontro - Apresentação Parcial",
+            title: "Quinto encontro - apresentação Parcial",
             description: "Apresentação parcial do portfólio para acompanhamento do progresso.",
             tags: ["Avaliação", "Portfólio"],
         },
         {
             date: "03/10/2024",
-            title: "Sexto Encontro",
+            title: "Sexto encontro",
             description: "Turma liberada pelo professor.",
             tags: ["Sem Aula"],
         },
         {
             date: "10/10/2024",
-            title: "Sétimo Encontro - Resolução de Exercícios",
+            title: "Sétimo encontro - Resolução de exercícios",
             description: (
                 <>
                     Tempo dedicado para resolução da lista de exercícios e consulta ao site{" "}
@@ -101,13 +184,13 @@ export default function DiaryPage() {
         },
         {
             date: "17/10/2024",
-            title: "Oitavo Encontro - Desafio PPM",
+            title: "Oitavo encontro - Desafio PPM",
             description: "Proposta de exercício: Criar manualmente uma imagem do tipo PPM através do bloco de notas e desenvolver um código em GO para ler cada linha dessa imagem.",
             tags: ["Desafio", "PPM", "Prática"],
         },
         {
             date: "24/10/2024",
-            title: "Nono Encontro - Defer vs Panic",
+            title: "Nono encontro - Defer vs Panic",
             description: (
                 <>
                     Revisão de atributos e funções no{" "}
@@ -126,14 +209,14 @@ export default function DiaryPage() {
         },
         {
             date: "14/11/2025",
-            title: "Atividade Extracurricular",
+            title: "Atividade extracurricular",
             description: "Liberados para participar da Palestra da Consciência Negra.",
             tags: ["Evento", "Extracurricular"],
         },
     ]
 
     return (
-        <div className="container py-10">
+        <div className="container py-10 px-5 md:px-10 xl:px-20">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -153,32 +236,10 @@ export default function DiaryPage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="relative pl-8 md:pl-12"
+                        className="relative pl-4 md:pl-12"
                     >
                         <div className="absolute -left-[5px] top-2 h-3 w-3 rounded-full bg-primary-light ring-4 ring-background" />
-                        <Card>
-                            <CardHeader>
-                                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                                    <div className="flex items-center gap-2 text-muted-foreground mb-1 md:mb-0">
-                                        <CalendarDays className="h-4 w-4" />
-                                        <span className="text-sm font-medium">{entry.date}</span>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        {entry.tags.map((tag) => (
-                                            <Badge key={tag} variant="secondary" className="text-xs">
-                                                {tag}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                </div>
-                                <CardTitle className="text-xl mt-2">{entry.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="leading-relaxed text-muted-foreground">
-                                    {entry.description}
-                                </p>
-                            </CardContent>
-                        </Card>
+                        <DiaryEntryCard entry={entry} />
                     </motion.div>
                 ))}
             </div>

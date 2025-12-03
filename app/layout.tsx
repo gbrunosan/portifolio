@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "IFMS Portifólio - Gerson",
-  description: "Portifólio para a matéria de Eletiva",
+  title: "IFMS Portfólio - Gerson",
+  description: "Portfólio para a matéria de Eletiva",
 };
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -23,12 +23,11 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
           disableTransitionOnChange
         >
           <div className="relative flex items-center min-h-screen flex-col">
             <SiteHeader />
-            <div className="flex justify-center items-center px-2.5 w-full max-w-[1300px]">{children}</div>
+            <div className="flex justify-center items-center w-full">{children}</div>
           </div>
         </ThemeProvider>
       </body>

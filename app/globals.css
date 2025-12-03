@@ -10,8 +10,9 @@
   --card-foreground: oklch(0.3015 0.0572 282.4176);
   --popover: oklch(1.0000 0 0);
   --popover-foreground: oklch(0.3015 0.0572 282.4176);
-  --primary: oklch(0.5417 0.1790 288.0332);
-  --primary-light: oklch(57.263% 0.22722 284.985);
+  --primary: oklch(0.5417 0.1790 288.0332); 
+  --primary-dark: oklch(84.987% 0.0502 294.186); 
+  --primary-light: oklch(35.003% 0.13949 285.651);
   --primary-foreground: oklch(1.0000 0 0);
   --secondary: oklch(0.9174 0.0435 292.6901);
   --secondary-foreground: oklch(0.4143 0.1039 288.1742);
@@ -66,7 +67,8 @@
   --card-foreground: oklch(0.9185 0.0257 285.8834);
   --popover: oklch(0.2284 0.0384 282.9324);
   --popover-foreground: oklch(0.9185 0.0257 285.8834);
-  --primary: oklch(0.4852 0.2427 280.7707);
+  --primary: oklch(49.849% 0.2335 282.168);
+  --primary-dark: oklch(24.754% 0.10946 283.571);
   --primary-light: oklch(73.536% 0.12182 291.193);
   --primary-foreground: oklch(0.9911 0 0);
   --secondary: oklch(0.3139 0.0736 283.4591);
@@ -121,6 +123,7 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
   --color-primary-light: var(--primary-light);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -165,7 +168,62 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-}
+  --animate-aurora: aurora 8s ease-in-out infinite alternate;
+  @keyframes aurora {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(-5deg) scale(0.9);
+    }
+  25% {
+    background-position: 50% 100%;
+    transform: rotate(5deg) scale(1.1);
+    }
+  50% {
+    background-position: 100% 50%;
+    transform: rotate(-3deg) scale(0.95);
+    }
+  75% {
+    background-position: 50% 0%;
+    transform: rotate(3deg) scale(1.05);
+    }
+  100% {
+    background-position: 0% 50%;
+    transform: rotate(-5deg) scale(0.9);
+    }
+  }
+  --animate-shiny-text: shiny-text 8s infinite
+;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  --animate-meteor: meteor 5s linear infinite;
+  @keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;
+    }
+  70% {
+    opacity: 1;
+    }
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;
+    }
+  }
+  --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+  @keyframes blink-cursor {
+  0%, 49% {
+    opacity: 1;
+    }
+  50%, 100% {
+    opacity: 0;
+    }
+  }}
 
 @layer base {
   * {
@@ -174,4 +232,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }

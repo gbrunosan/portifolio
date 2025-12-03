@@ -8,13 +8,13 @@ export default function EvaluationsPage() {
     const evaluations = [
         {
             title: "Portfólio",
-            description: "Anotações e Atividades",
+            description: "Anotações e atividades",
             icon: <BookOpen className="h-8 w-8 text-blue-500" />,
             details: "Um portfólio completo contendo anotações detalhadas de todas as aulas e todas as atividades desenvolvidas durante o curso.",
         },
         {
-            title: "Projeto em Trio",
-            description: "Aplicação Prática",
+            title: "Projeto em trio",
+            description: "Aplicação prática",
             icon: <Users className="h-8 w-8 text-green-500" />,
             details: "Desenvolvimento de um projeto em grupo de 3 pessoas. O tema será definido pelo professor e aplicará os conhecimentos adquiridos.",
         },
@@ -25,15 +25,15 @@ export default function EvaluationsPage() {
             details: "Atividades práticas realizadas durante o desenvolvimento do projeto para fixação de conteúdo e acompanhamento.",
         },
         {
-            title: "Pontos Extras",
-            description: "Frequência e Participação",
+            title: "Pontos extras",
+            description: "Frequência e participação",
             icon: <Star className="h-8 w-8 text-yellow-500" />,
             details: "0,5 ponto na média pela frequência nas aulas e mais 0,5 ponto pela participação na primeira aula.",
         },
     ]
 
     return (
-        <div className="container py-10">
+        <div className="container py-10 px-5 md:px-10 xl:px-20">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

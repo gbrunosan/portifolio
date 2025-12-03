@@ -10,7 +10,142 @@ import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Info } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Info } from "lucide-react"
+
+// ... (Exercise interface and exercises array remain unchanged)
+
+export default function ExercisesPage() {
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [isInstructionsOpen, setIsInstructionsOpen] = useState(false)
+    const selectedExercise = exercises[currentIndex]
+
+    const handleNext = () => {
+        setCurrentIndex((prev) => (prev + 1) % exercises.length)
+    }
+
+    const handlePrev = () => {
+        setCurrentIndex((prev) => (prev - 1 + exercises.length) % exercises.length)
+    }
+
+    return (
+        <div className="container py-10 px-5 md:px-10 xl:px-20">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-8"
+            >
+                <h1 className="text-4xl font-bold tracking-tight mb-4">Exercícios</h1>
+
+                <Alert
+                    className="block bg-muted/50 border-primary/20 mb-8 cursor-pointer transition-all hover:bg-muted/80"
+                    onClick={() => setIsInstructionsOpen(!isInstructionsOpen)}
+                >
+                    <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                            <Info className="h-4 w-4" />
+                            <AlertTitle className="mb-0 line-clamp-none">Como executar</AlertTitle>
+                        </div>
+                        {isInstructionsOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                    </div>
+
+                    <motion.div
+                        initial={false}
+                        animate={{ height: isInstructionsOpen ? "auto" : 0, opacity: isInstructionsOpen ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                    >
+                        <AlertDescription className="mt-4">
+                            <ul className="list-disc list-inside space-y-4 text-muted-foreground">
+                                <li>Para executar estes exercícios, você deve criar uma pasta chamada <code>exercicios</code> dentro do seu projeto GO.</li>
+                                <li>Coloque o código de cada função dentro dessa pasta (com <code>package exercicios</code>).</li>
+                                <li>Em seguida, utilize o arquivo <code>main.go</code> na raiz do projeto para chamar as funções, conforme o exemplo abaixo.</li>
+                            </ul>
+                        </AlertDescription>
+                    </motion.div>
+                </Alert>
+            </motion.div>
+
+            {/* Mobile Pagination Controls */}
+            <div className="flex items-center justify-between mb-6 md:hidden">
+                <Button variant="outline" size="icon" onClick={handlePrev}>
+                    <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <span className="text-sm font-medium">
+                    Exercício {currentIndex + 1} de {exercises.length}
+                </span>
+                <Button variant="outline" size="icon" onClick={handleNext}>
+                    <ChevronRight className="h-4 w-4" />
+                </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
+                <div className="hidden md:block space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="text-lg">Lista de Exercícios</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-0">
+                            <ScrollArea className="h-[600px]">
+                                <div className="flex flex-col p-2 gap-2">
+                                    {exercises.map((exercise, index) => (
+                                        <Button
+                                            key={exercise.id}
+                                            variant={currentIndex === index ? "secondary" : "ghost"}
+                                            className="justify-start text-left h-auto py-3 hover:text-primary transition-colors duration-300"
+                                            onClick={() => setCurrentIndex(index)}
+                                        >
+                                            <div className="flex flex-col gap-1 w-full">
+                                                <span className="font-medium">{exercise.title}</span>
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-xs text-muted-foreground truncate w-[150px]">
+                                                        {exercise.description}
+                                                    </span>
+                                                    <Badge variant="outline" className="text-[10px] h-5">
+                                                        {exercise.difficulty}
+                                                    </Badge>
+                                                </div>
+                                            </div>
+                                        </Button>
+                                    ))}
+                                </div>
+                            </ScrollArea>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <motion.div
+                    key={selectedExercise.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <Card className="h-full">
+                        <CardHeader>
+                            <div className="flex justify-between items-start">
+                                <div>
+                                    <CardTitle className="text-2xl mb-2">{selectedExercise.title}</CardTitle>
+                                    <CardDescription className="text-base">
+                                        {selectedExercise.description}
+                                    </CardDescription>
+                                </div>
+                                <Badge>{selectedExercise.difficulty}</Badge>
+                            </div>
+                        </CardHeader>
+                        <Separator />
+                        <CardContent className="p-6">
+                            <div className="rounded-md bg-muted p-4 overflow-x-auto">
+                                <pre className="text-sm font-mono">
+                                    <code>{selectedExercise.code}</code>
+                                </pre>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </motion.div>
+            </div>
+        </div>
+    )
+}
 
 interface Exercise {
     id: string
@@ -541,99 +676,4 @@ func main() {
     },
 ]
 
-export default function ExercisesPage() {
-    const [selectedExercise, setSelectedExercise] = useState<Exercise>(exercises[0])
 
-    return (
-        <div className="container py-10">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-8"
-            >
-                <h1 className="text-4xl font-bold tracking-tight mb-4">Exercícios</h1>
-                <p className="text-xl text-muted-foreground mb-6">
-                    Pratique com exercícios resolvidos de GO.
-                </p>
-
-                <Alert className="bg-muted/50 border-primary/20 mb-8">
-                    <Info className="h-4 w-4" />
-                    <AlertTitle>Como executar</AlertTitle>
-                    <AlertDescription>
-                        <ul className="list-disc list-inside">
-                            <li>Para executar estes exercícios, você deve criar uma pasta chamada <code>exercicios</code> dentro do seu projeto GO.</li>
-                            <li>Coloque o código de cada função dentro dessa pasta (com <code>package exercicios</code>).</li>
-                            <li>Em seguida, utilize o arquivo <code>main.go</code> na raiz do projeto para chamar as funções, conforme o exemplo abaixo.</li>
-                        </ul>
-                    </AlertDescription>
-                </Alert>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
-                <div className="space-y-4">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="text-lg">Lista de Exercícios</CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-0">
-                            <ScrollArea className="h-[600px]">
-                                <div className="flex flex-col p-2 gap-2">
-                                    {exercises.map((exercise) => (
-                                        <Button
-                                            key={exercise.id}
-                                            variant={selectedExercise.id === exercise.id ? "secondary" : "ghost"}
-                                            className="justify-start text-left h-auto py-3 hover:text-primary transition-colors duration-300"
-                                            onClick={() => setSelectedExercise(exercise)}
-                                        >
-                                            <div className="flex flex-col gap-1 w-full">
-                                                <span className="font-medium">{exercise.title}</span>
-                                                <div className="flex justify-between items-center">
-                                                    <span className="text-xs text-muted-foreground truncate w-[150px]">
-                                                        {exercise.description}
-                                                    </span>
-                                                    <Badge variant="outline" className="text-[10px] h-5">
-                                                        {exercise.difficulty}
-                                                    </Badge>
-                                                </div>
-                                            </div>
-                                        </Button>
-                                    ))}
-                                </div>
-                            </ScrollArea>
-                        </CardContent>
-                    </Card>
-                </div>
-
-                <motion.div
-                    key={selectedExercise.id}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <Card className="h-full">
-                        <CardHeader>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <CardTitle className="text-2xl mb-2">{selectedExercise.title}</CardTitle>
-                                    <CardDescription className="text-base">
-                                        {selectedExercise.description}
-                                    </CardDescription>
-                                </div>
-                                <Badge>{selectedExercise.difficulty}</Badge>
-                            </div>
-                        </CardHeader>
-                        <Separator />
-                        <CardContent className="p-6">
-                            <div className="rounded-md bg-muted p-4 overflow-x-auto">
-                                <pre className="text-sm font-mono">
-                                    <code>{selectedExercise.code}</code>
-                                </pre>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </motion.div>
-            </div>
-        </div>
-    )
-}
