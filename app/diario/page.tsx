@@ -60,7 +60,7 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="leading-relaxed text-muted-foreground mt-2.5">
+                    <p className="leading-relaxed text-muted-foreground mt-5">
                         {entry.description}
                     </p>
                 </CardContent>
