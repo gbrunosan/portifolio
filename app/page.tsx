@@ -64,7 +64,7 @@ export default function Home() {
             className="space-y-4 md:space-y-6 max-w-xs sm:max-w-lg lg:max-w-xl xl:max-w-2xl relative z-10 rounded-xl"
           >
             <div className="lg:hidden flex justify-center">
-              <IconCloudDemo size={210} className="lg:hidden " />
+              <IconCloudDemo size={215} className="lg:hidden " />
             </div>
             <AuroraText className="text-4xl font-extrabold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-primary pb-2">
               Portfólio de Eletiva
@@ -113,8 +113,8 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 5, duration: 3 }}
-          className="absolute bottom-5 md:bottom-20 animate-bounce cursor-pointer z-20"
+          transition={{ delay: 3, duration: 3 }}
+          className="absolute bottom-11 md:bottom-20 animate-bounce cursor-pointer z-20"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
           <span className="text-muted-foreground text-sm">Role para ver mais</span>
