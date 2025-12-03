@@ -31,7 +31,9 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
     }, [])
 
     return (
-        <Card className="relative overflow-hidden">
+        <Card
+            className="relative overflow-hidden transition-all duration-300 hover:border-primary hover:scale-[1.005] hover:drop-shadow-md hover:-translate-y-1"
+        >
             <motion.div
                 ref={contentRef}
                 initial={false}
@@ -53,26 +55,37 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
                             ))}
                         </div>
                     </div>
-                    <CardTitle className="text-xl mt-2">{entry.title}</CardTitle>
+                    <CardTitle className="text-xl mt-2 h-8 flex items-center">
+                        {entry.title}
+                    </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="leading-relaxed text-muted-foreground mt-1.5">
+                    <p className="leading-relaxed text-muted-foreground mt-2.5">
                         {entry.description}
                     </p>
                 </CardContent>
             </motion.div>
 
             {showExpandButton && (
-                <div
+                <motion.div
                     role="button"
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className={cn(
-                        "flex justify-center w-full bg-gradient-to-t from-card via-card/95 to-transparent cursor-pointer group",
-                        !isExpanded ? "absolute bottom-0 pt-16 pb-4" : "mt-4 pb-2"
-                    )}
+                    initial={false}
+                    animate={{
+                        marginTop: isExpanded ? 16 : -80,
+                        paddingTop: isExpanded ? 0 : 64,
+                        paddingBottom: isExpanded ? 8 : 16
+                    }}
+                    className="relative z-10 flex justify-center w-full cursor-pointer group"
                 >
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-card via-card/95 to-transparent"
+                        initial={false}
+                        animate={{ opacity: isExpanded ? 0 : 1 }}
+                        transition={{ duration: 0.3 }}
+                    />
                     <button
-                        className="flex items-center gap-1 text-sm text-primary group-hover:text-primary/80 transition-colors font-medium"
+                        className="relative z-20 flex items-center gap-1 text-sm text-primary group-hover:text-primary/80 transition-colors font-medium"
                     >
                         {isExpanded ? (
                             <>
@@ -84,7 +97,7 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
                             </>
                         )}
                     </button>
-                </div>
+                </motion.div>
             )}
         </Card>
     )
