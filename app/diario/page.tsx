@@ -31,13 +31,13 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
     }, [])
 
     return (
-        <Card className="relative overflow-hidden transition-all duration-300">
-            <div
+        <Card className="relative overflow-hidden">
+            <motion.div
                 ref={contentRef}
-                className={cn(
-                    "transition-all duration-300",
-                    !isExpanded && "max-h-[275px] overflow-hidden"
-                )}
+                initial={false}
+                animate={{ height: isExpanded || !showExpandButton ? "auto" : 275 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="overflow-hidden"
             >
                 <CardHeader>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -56,11 +56,11 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
                     <CardTitle className="text-xl mt-2">{entry.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="leading-relaxed text-muted-foreground">
+                    <p className="leading-relaxed text-muted-foreground mt-1.5">
                         {entry.description}
                     </p>
                 </CardContent>
-            </div>
+            </motion.div>
 
             {showExpandButton && (
                 <div
