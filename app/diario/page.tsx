@@ -64,14 +64,15 @@ const DiaryEntryCard = ({ entry }: { entry: DiaryEntry }) => {
 
             {showExpandButton && (
                 <div
+                    role="button"
+                    onClick={() => setIsExpanded(!isExpanded)}
                     className={cn(
-                        "flex justify-center w-full bg-gradient-to-t from-card via-card/95 to-transparent",
-                        !isExpanded ? "absolute bottom-0 pt-16 pb-4" : "mt-4"
+                        "flex justify-center w-full bg-gradient-to-t from-card via-card/95 to-transparent cursor-pointer group",
+                        !isExpanded ? "absolute bottom-0 pt-16 pb-4" : "mt-4 pb-2"
                     )}
                 >
                     <button
-                        onClick={() => setIsExpanded(!isExpanded)}
-                        className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+                        className="flex items-center gap-1 text-sm text-primary group-hover:text-primary/80 transition-colors font-medium"
                     >
                         {isExpanded ? (
                             <>
