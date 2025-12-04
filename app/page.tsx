@@ -44,7 +44,7 @@ export default function Home() {
               y: [0, -25, 0]
             }}
             transition={{
-              opacity: { duration: 0.8, delay: 5 },
+              opacity: { duration: 2.5, delay: 5 },
               y: {
                 duration: 15,
                 repeat: Infinity,
@@ -67,7 +67,7 @@ export default function Home() {
               <IconCloudDemo size={215} className="lg:hidden " />
             </div>
             <AuroraText className="text-4xl font-extrabold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-primary pb-2">
-              Portfólio <TypingAnimation words={["de Eletiva", "do Gerson"]} delay={500} pauseDelay={500} loop={false}></TypingAnimation> 
+              Portfólio <TypingAnimation words={["de Eletiva", "do Gerson"]} delay={400} pauseDelay={500} loop={false}></TypingAnimation> 
             </AuroraText>
             <TextAnimate animation="slideUp" by="word" duration={0.7} as="p">
               Documentação completa da disciplina de Tópicos especiais em Tecnologia da Informação de Programação utilizando GO no IFMS.
