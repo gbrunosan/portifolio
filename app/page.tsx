@@ -44,7 +44,7 @@ export default function Home() {
               y: [0, -25, 0]
             }}
             transition={{
-              opacity: { duration: 0.8, delay: 1.5 },
+              opacity: { duration: 0.8, delay: 5 },
               y: {
                 duration: 15,
                 repeat: Infinity,
@@ -67,7 +67,7 @@ export default function Home() {
               <IconCloudDemo size={215} className="lg:hidden " />
             </div>
             <AuroraText className="text-4xl font-extrabold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-primary pb-2">
-              Portfólio <TypingAnimation words={["de Eletiva", "do Gerson"]} pauseDelay={500} loop={false}></TypingAnimation> 
+              Portfólio <TypingAnimation words={["de Eletiva", "do Gerson"]} delay={500} pauseDelay={500} loop={false}></TypingAnimation> 
             </AuroraText>
             <TextAnimate animation="slideUp" by="word" duration={0.7} as="p">
               Documentação completa da disciplina de Tópicos especiais em Tecnologia da Informação de Programação utilizando GO no IFMS.
@@ -90,15 +90,15 @@ export default function Home() {
           <motion.img
             src="/note.webp"
             alt="Notebook"
-            initial={{ opacity: 0, x: 150, y: 0 }}
+            initial={{ opacity: 0, x: 270, y: 0 }}
             animate={{
               opacity: 1,
               x: 0,
               y: [0, 50, 0]
             }}
             transition={{
-              opacity: { duration: 0.8, delay: 0.6 },
-              x: { duration: 0.8, delay: 0.6 },
+              opacity: { duration: 0.8, delay: 1.6 },
+              x: { duration: 0.8, delay: 1.6 },
               y: {
                 duration: 15,
                 repeat: Infinity,
@@ -113,7 +113,7 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3, duration: 3 }}
+          transition={{ delay: 7, duration: 3 }}
           className="absolute bottom-16 md:bottom-20 animate-bounce cursor-pointer z-20"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
