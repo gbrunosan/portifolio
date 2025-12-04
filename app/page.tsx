@@ -63,14 +63,14 @@ export default function Home() {
             transition={{ duration: 1.5 }}
             className="space-y-4 md:space-y-6 max-w-xs sm:max-w-lg lg:max-w-xl xl:max-w-2xl relative z-10 rounded-xl"
           >
-            <div className="lg:hidden flex justify-center">
-              <IconCloudDemo size={215} className="lg:hidden " />
+            <div className="lg:hidden flex justify-center py-3">
+              <IconCloudDemo size={200} className="lg:hidden " />
             </div>
-            <AuroraText className="text-4xl font-extrabold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-primary pb-2">
-              Portfólio <TypingAnimation words={["de Eletiva", "do Gerson"]} delay={400} pauseDelay={500} loop={false}></TypingAnimation> 
+            <AuroraText className="text-3xl sm:text-4xl font-extrabold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-primary pb-2">
+              Portfólio do Gerson
             </AuroraText>
             <TextAnimate animation="slideUp" by="word" duration={0.7} as="p">
-              Documentação completa da disciplina de Tópicos especiais em Tecnologia da Informação de Programação utilizando GO no IFMS.
+              Documentação da disciplina de Tópicos especiais em Tecnologia da Informação de programação.
             </TextAnimate>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
@@ -114,7 +114,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 7, duration: 3 }}
-          className="absolute bottom-16 md:bottom-20 animate-bounce cursor-pointer z-20"
+          className="absolute bottom-15 md:bottom-20 animate-bounce cursor-pointer z-20"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
           <span className="text-muted-foreground text-sm">Role para ver mais</span>

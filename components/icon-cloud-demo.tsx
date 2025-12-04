@@ -40,8 +40,8 @@ export function IconCloudDemo({ className, size = 400 }: { className?: string, s
     )
 
     return (
-        <div className={cn("relative flex size-full max-w-lg items-center justify-center overflow-hidden p-4", className)}>
-            <IconCloud images={images} width={size} height={size} iconSize={25} />
+        <div className={cn("relative flex size-full max-w-lg items-center justify-center overflow-hidden", className)}>
+            <IconCloud images={images} width={size} height={size} iconSize={22} />
         </div>
     )
 }
