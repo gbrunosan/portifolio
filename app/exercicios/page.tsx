@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Info } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Info, Code2, Terminal } from "lucide-react"
 
 // ... (Exercise interface and exercises array remain unchanged)
 
@@ -79,7 +79,7 @@ export default function ExercisesPage() {
                 </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] XL:grid-cols-[300px_1fr] gap-8">
                 <div className="hidden md:block space-y-4">
                     <Card>
                         <CardHeader>
@@ -119,8 +119,9 @@ export default function ExercisesPage() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
+                    className="min-w-0"
                 >
-                    <Card className="h-full">
+                    <Card className="h-full ">
                         <CardHeader>
                             <div className="flex justify-between items-start">
                                 <div>
@@ -133,12 +134,46 @@ export default function ExercisesPage() {
                             </div>
                         </CardHeader>
                         <Separator />
-                        <CardContent className="p-6">
+                        <CardContent className="py-2">
                             <div className="rounded-md bg-muted p-4 overflow-x-auto">
                                 <pre className="text-sm font-mono">
                                     <code>{selectedExercise.code}</code>
                                 </pre>
                             </div>
+
+                            {selectedExercise.executionCode && (
+                                <>
+                                    <Separator className="my-6" />
+                                    <div className="space-y-3">
+                                        <h3 className="text-lg font-semibold flex items-center gap-2">
+                                            <Code2 className="h-5 w-5" />
+                                            Exemplo de uso
+                                        </h3>
+                                        <div className="rounded-md bg-muted p-4 overflow-x-auto border border-border">
+                                            <pre className="text-sm font-mono text-muted-foreground">
+                                                <code>{selectedExercise.executionCode}</code>
+                                            </pre>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+
+                            {selectedExercise.output && (
+                                <>
+                                    <Separator className="my-6" />
+                                    <div className="space-y-3">
+                                        <h3 className="text-lg font-semibold flex items-center gap-2">
+                                            <Terminal className="h-5 w-5" />
+                                            Saída
+                                        </h3>
+                                        <div className="rounded-md bg-black p-4 overflow-x-auto border border-border shadow-inner">
+                                            <pre className="text-sm font-mono text-green-400">
+                                                <code>{selectedExercise.output}</code>
+                                            </pre>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </CardContent>
                     </Card>
                 </motion.div>
@@ -153,6 +188,8 @@ interface Exercise {
     description: string
     code: string
     difficulty: "Fácil" | "Médio" | "Difícil"
+    executionCode?: string
+    output?: string
 }
 
 const exercises: Exercise[] = [
@@ -168,6 +205,8 @@ import "fmt"
 func Soma(a, b int) {
     fmt.Printf("%d + %d = %d\\n", a, b, a+b)
 }`,
+        executionCode: `exercicios.Soma(10, 5)`,
+        output: `10 + 5 = 15`,
     },
     {
         id: "divisao",
@@ -181,6 +220,8 @@ import "fmt"
 func Divisao(a, b int) {
     fmt.Printf("%d / %d = %d\\n", a, b, a / b)
 }`,
+        executionCode: `exercicios.Divisao(10, 2)`,
+        output: `10 / 2 = 5`,
     },
     {
         id: "antecessor-sucessor",
@@ -194,6 +235,8 @@ import "fmt"
 func AntecessorSucessor(numero int) {
 	fmt.Printf("Você digitou: %d | Antecessor: %d | Sucessor: %d\\n", numero, numero-1, numero+1)
 }`,
+        executionCode: `exercicios.AntecessorSucessor(99)`,
+        output: `Você digitou: 99 | Antecessor: 98 | Sucessor: 100`,
     },
     {
         id: "verificar-numero",
@@ -223,6 +266,8 @@ func VerificarNumero(n int) {
 
 	fmt.Printf("O número %d é %s e %s\\n", n, tipo, sinal)
 }`,
+        executionCode: `exercicios.VerificarNumero(-8)`,
+        output: `O número -8 é Par e Negativo`,
     },
     {
         id: "primo",
@@ -256,6 +301,10 @@ func VerificarPrimo(n int) {
 		fmt.Printf("%d não é primo\\n", n)
 	}
 }`,
+        executionCode: `exercicios.VerificarPrimo(17)
+exercicios.VerificarPrimo(10)`,
+        output: `17 é primo
+10 não é primo`,
     },
     {
         id: "ordenacao-numerica",
@@ -273,6 +322,10 @@ func OrdenarNumeros(lista []int) {
 	
 	fmt.Println("Lista ordenada:", lista)
 }`,
+        executionCode: `meusNumeros := []int{9, 1, 5, 2, 8} 
+exercicios.OrdenarNumeros(meusNumeros)`,
+        output: `Lista original: [9 1 5 2 8]
+Lista ordenada: [1 2 5 8 9]`,
     },
     {
         id: "ordenacao-texto",
@@ -292,6 +345,8 @@ func OrdenarTexto(texto string) {
 	
 	fmt.Printf("Original: %s | Ordenado: %s\\n", texto, resultado)
 }`,
+        executionCode: `exercicios.OrdenarTexto("edcba")`,
+        output: `Original: edcba | Ordenado: abcde`,
     },
     {
         id: "valor-endereco",
@@ -305,6 +360,8 @@ import "fmt"
 func ImprimirValorEEndereco(n int) {
 	fmt.Printf("Digitado: %d | Endereço na Memória: %p\\n", n, &n)
 }`,
+        executionCode: `exercicios.ImprimirValorEEndereco(100)`,
+        output: `Digitado: 100 | Endereço na Memória: 0xc0000120b8`,
     },
     {
         id: "hanoi",
@@ -322,6 +379,14 @@ func TorresDeHanoi(n int, origem, destino, auxiliar string) {
 		TorresDeHanoi(n-1, auxiliar, destino, origem)
 	}
 }`,
+        executionCode: `exercicios.TorresDeHanoi(3, "A", "C", "B")`,
+        output: `Mover disco 1 de A para C
+Mover disco 2 de A para B
+Mover disco 1 de C para B
+Mover disco 3 de A para C
+Mover disco 1 de B para A
+Mover disco 2 de B para C
+Mover disco 1 de A para C`,
     },
     {
         id: "dia-nascimento",
@@ -344,6 +409,8 @@ func DiaDaSemanaNascimento(dia, mes, ano int) {
 	
 	fmt.Printf("Você nasceu em um(a): %s\\n", diasEmPortugues[diaSemana])
 }`,
+        executionCode: `exercicios.DiaDaSemanaNascimento(02, 03, 2001)`,
+        output: `Você nasceu em um(a): Sexta-feira`,
     },
     {
         id: "igualdade",
@@ -355,6 +422,10 @@ func DiaDaSemanaNascimento(dia, mes, ano int) {
 func SaoIguais(a, b int) bool {
 	return a == b
 }`,
+        executionCode: `fmt.Println("5 e 5 são iguais?", exercicios.SaoIguais(5, 5))
+fmt.Println("5 e 8 são iguais?", exercicios.SaoIguais(5, 8))`,
+        output: `5 e 5 são iguais? true
+5 e 8 são iguais? false`,
     },
     {
         id: "moda",
@@ -377,6 +448,9 @@ func CalcularModa(numeros []int) int {
 	}
 	return moda
 }`,
+        executionCode: `lista := []int{1, 2, 3, 2, 4, 2, 5}
+fmt.Println("A moda é:", exercicios.CalcularModa(lista))`,
+        output: `A moda é: 2`,
     },
     {
         id: "palindromo",
@@ -400,6 +474,10 @@ func VerificarPalindromo(palavra string) bool {
 
 	return palavra == invertida
 }`,
+        executionCode: `fmt.Println("Arara é palíndromo?", exercicios.VerificarPalindromo("Arara"))
+fmt.Println("Casa é palíndromo?", exercicios.VerificarPalindromo("Casa"))`,
+        output: `Arara é palíndromo? true
+Casa é palíndromo? false`,
     },
     {
         id: "area-retangulo",
@@ -411,6 +489,8 @@ func VerificarPalindromo(palavra string) bool {
 func AreaRetangulo(largura, altura float64) float64 {
 	return largura * altura
 }`,
+        executionCode: `fmt.Println("Área:", exercicios.AreaRetangulo(10.0, 5.0))`,
+        output: `Área: 50`,
     },
     {
         id: "conversao-temp",
@@ -425,6 +505,8 @@ func ConverterCelsiusParaFahrenheit(celsius float64) {
 	fahrenheit := (celsius * 1.8) + 32
 	fmt.Printf("%.2f°C equivale a %.2f°F\\n", celsius, fahrenheit)
 }`,
+        executionCode: `exercicios.ConverterCelsiusParaFahrenheit(30)`,
+        output: `30.00°C equivale a 86.00°F`,
     },
     {
         id: "adivinhacao",
@@ -459,6 +541,14 @@ func JogoAdivinhacao() {
 
 	fmt.Printf("Parabéns! Você acertou %d depois de %d vez(es).\\n", numeroSecreto, tentativas)
 }`,
+        executionCode: `exercicios.JogoAdivinhacao()`,
+        output: `Tente adivinhar o número entre 0 e 10!
+Seu palpite: 5
+O número é MAIOR...
+Seu palpite: 8
+O número é MENOR...
+Seu palpite: 7
+Parabéns! Você acertou 7 depois de 3 vez(es).`,
     },
     {
         id: "vogais-consoantes",
@@ -486,6 +576,9 @@ func ContarVogaisConsoantes(palavra string) (int, int) {
 	}
 	return qtdVogais, qtdConsoantes
 }`,
+        executionCode: `v, c := exercicios.ContarVogaisConsoantes("Gersinho")
+fmt.Printf("Palavra 'Gersinho' tem: %d vogais e %d consoantes\\n", v, c)`,
+        output: `Palavra 'Gersinho' tem: 3 vogais e 5 consoantes`,
     },
     {
         id: "ocorrencia-palavra",
@@ -502,6 +595,10 @@ func ContarOcorrenciaPalavra(texto string, alvo string) int {
 	
 	return strings.Count(textoLower, alvoLower)
 }`,
+        executionCode: `texto := "O rato roeu a roupa do outro rato de Roma"
+qtd := exercicios.ContarOcorrenciaPalavra(texto, "rato")
+fmt.Println("A palavra 'rato' aparece:", qtd, "vez(es)")`,
+        output: `A palavra 'rato' aparece: 2 vez(es)`,
     },
     {
         id: "fatorial-calc",
@@ -520,6 +617,8 @@ func Fatorial(n int) int {
 	}
 	return resultado
 }`,
+        executionCode: `fmt.Println("Fatorial de 5:", exercicios.Fatorial(5))`,
+        output: `Fatorial de 5: 120`,
     },
     {
         id: "ola-mundo",
@@ -533,6 +632,8 @@ import "fmt"
 func OlaMundo() {
 	fmt.Println("Hello World")
 }`,
+        executionCode: `exercicios.OlaMundo()`,
+        output: `Hello World`,
     },
     {
         id: "imc",
@@ -547,6 +648,8 @@ func CalcularIMC(peso float64, altura float64) {
 	imc := peso / (altura * altura)
 	fmt.Printf("Peso: %.2f | Altura: %.2f | IMC: %.2f\\n", peso, altura, imc)
 }`,
+        executionCode: `exercicios.CalcularIMC(80.0, 1.80)`,
+        output: `Peso: 80.00 | Altura: 1.80 | IMC: 24.69`,
     },
     {
         id: "mmc",
@@ -565,6 +668,8 @@ func mdc(a, b int) int {
 func CalcularMMC(a, b int) int {
 	return (a * b) / mdc(a, b)
 }`,
+        executionCode: `fmt.Println("MMC de 4 e 6 é:", exercicios.CalcularMMC(4, 6))`,
+        output: `MMC de 4 e 6 é: 12`,
     },
     {
         id: "media",
@@ -580,6 +685,9 @@ func CalcularMedia(numeros []float64) float64 {
 	}
 	return soma / float64(len(numeros))
 }`,
+        executionCode: `notas := []float64{7.5, 8.0, 9.5}
+fmt.Printf("A média é: %.2f\\n", exercicios.CalcularMedia(notas))`,
+        output: `A média é: 8.33`,
     },
     {
         id: "main",
@@ -590,7 +698,8 @@ func CalcularMedia(numeros []float64) float64 {
 
 import (
 	"fmt"
-	"projeto/exercicios" // Certifique-se que "projeto" é o nome que você usou no go mod init
+	"projeto/exercicios" 
+    // usei "projeto" pois é o nome que usei no go mod init
 )
 
 func main() {
