@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "IFMS Portfólio - Gerson",
-  description: "Portfólio para a matéria de Eletiva",
+  description: "Portfólio para a matéria de Tópicos especiais em Tecnologia da Informação",
 };
 
 import { ThemeProvider } from "@/components/theme-provider";

@@ -31,7 +31,7 @@ export default function Home() {
       />
       {/* Hero Section */}
       <div className="flex flex-col flex-1 items-center lg:justify-center min-h-[calc(100vh-3.5rem)] pb-10 lg:py-10 text-center relative overflow-hidden">
-        
+
         <Meteors minDuration={2} maxDuration={16} className="hidden lg:block" />
 
         <div className="relative w-full flex justify-center items-center mb-10 z-10">
@@ -67,10 +67,10 @@ export default function Home() {
               <IconCloudDemo size={215} className="lg:hidden " />
             </div>
             <AuroraText className="text-4xl font-extrabold tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-primary pb-2">
-              Portfólio de Eletiva
+              Portfólio <TypingAnimation words={["de Eletiva", "do Gerson"]} pauseDelay={500} loop={false}></TypingAnimation> 
             </AuroraText>
-            <TextAnimate animation="slideUp" by="word" duration={0.5} as="p">
-              Documentação completa da disciplina de Eletiva de Programação em GO no IFMS.
+            <TextAnimate animation="slideUp" by="word" duration={0.7} as="p">
+              Documentação completa da disciplina de Tópicos especiais em Tecnologia da Informação de Programação utilizando GO no IFMS.
             </TextAnimate>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">

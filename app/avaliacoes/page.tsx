@@ -42,7 +42,7 @@ export default function EvaluationsPage() {
             >
                 <h1 className="text-4xl font-bold tracking-tight mb-4">Avaliações</h1>
                 <p className="text-xl text-muted-foreground">
-                    Critérios e métodos de avaliação da disciplina de Eletiva.
+                    Critérios e métodos de avaliação da disciplina de Tópicos especiais em Tecnologia da Informação.
                 </p>
             </motion.div>
 

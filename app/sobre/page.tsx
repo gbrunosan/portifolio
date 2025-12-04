@@ -69,7 +69,7 @@ export default function AboutPage() {
                         </CardHeader>
                         <CardContent className="p-0 mt-2">
                             <p className="leading-7 text-lg text-muted-foreground">
-                                Professor Mestre do IFMS e Coordenador de Engenharia da Computação. Ministra a disciplina de Eletiva, ama Visão Computacional e não dispensa um churrasco com os orientandos.
+                                Professor Mestre do IFMS e Coordenador de Engenharia da Computação. Ministra a disciplina de Tópicos especiais em Tecnologia da Informação, ama Visão Computacional e não dispensa um churrasco com os orientandos.
                             </p>
                         </CardContent>
                     </Card>
